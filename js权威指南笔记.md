@@ -1,4 +1,4 @@
-##学习markdown语法 
+##边学习markdown语法 
 ###1. 词法结构
 >用来描述如何使用这门语言来编写程序
 
@@ -16,8 +16,15 @@
 >
 >[unicode说明](http://baike.baidu.com/link?url=4W9_8ACrdRYPz7sdJ19nH5bopn42NfmT6DJg73aS3ysBK71bqPdGe5JxbFH8F8jSP5bCkb7KM--PqoQTt_oVAK "unicode简介")
 
+  |类别|最长字符数|说明|编码方式|
+  |---|---|---|
+  |UNICODE|0-0x10FFFF|所有字符的编码|现在统一使用的是UCS-2,16位编码空间，每个字符占用2个字节,U+16进制
+  |UTF-8||八进制的UNICODE转换编码格式，针对UNICODE的可变长度的字元编码|采八位用至少六个字节为字符编码,八位为单位进行编码
+    |ASCII|128个字符|英文字符和二进制的对应|只规定了英文字符与，标点之间的关系|
 
 
+>In utf-8,前128个字符存储在单一的字节中，使用字符串而不规定他的编码是没有任何意义的。设置如下格式告诉用户代理使用的编码格式：Content-Type=text/plain;charset="UTF-8"
+ 
 **js区分大小写**
 
 **注释**
@@ -86,48 +93,50 @@ js是面向对象的编程，不严格的讲，我们不需要全局的定义函
 	
 	- 情形
 
-	        溢出：overflow：当数字运算结果超出了js所能表示的数字上限；*js返回Infinity无穷大*
+	     |overflow|当数字运算结果超出了js所能表示的数字上限；*js返回Infinity无穷*|
+		 |---|----|
+		|underflow|当运算结果无限接近于0,并比js所能表示的最小值还小；*此种情况下会返回0*|
+	|被零整除|js并不报错，只是简单的返回无穷大；但是0/0=NaN;|
+	二进制浮点数并不能精确的表示类似.1这样的实数
 
-			下溢：underflow：当运算结果无限接近于0,并比js所能表示的最小值还小；*此种情况下会返回0*
-			被零整除：js并不报错，只是简单的返回无穷大；但是0/0=NaN;
-			二进制浮点数并不能精确的表示类似.1这样的实数
-	
 	- 处理
 	
-			overflow：返回无穷大；
-			underflow:返回0；
-			被0整除：返回无穷大；返回NaN的情况：0/0；Infinity/Infinity,任一负数做开方；算术运算符与不是数字或者无法转换成数字的操作数一起使用时；
+	|overflow|返回无穷大|
+	|---|----|
+	|underflow|返回0
+	|被0整除|返回无穷大|
+	|返回NaN的情况|0/0；Infinity/Infinity,任一负数做开方；算术运算符与不是数字或者无法转换成数字的操作数一起使用时；
 			
 
-		*特殊之处：NaN与任何值均不相等，包括自身；0===-0；else作为除数的结果*
+  NaN与任何值均不相等，包括自身；0===-0；else作为除数的结果
 
 **日期和时间**
 
 Date()构造函数用来创建表示时间和日期的对象。
 
-这些对象提供了内置API来：
+这些对象提供了内置API来：date=new Date();
 
-		Date.方法	功能说明
-		date=new Date();
-		date.getYear()	返回年份
-		date.getTime()	返回自1970年1月1日0:0:0至今的毫秒值
-		date.valueOf()	返回1970年1月1日0:0:0至今的毫秒值
-		date.toString()	返回日期时间的字符串
-		date.toDateString()	返回日期的字符串
-		date.toTimeString()	返回时间的字符串
-		date.toLocaleString()	返回日期时间的本地字符串
-		date.toLocaleDateString()	返回日期的本地字符串
-		date.toLocaleTimeString()	返回时间的本地字符串
-		date.toDMTString()	返回日期时间的UTC字符串
-		date.toUTCString()	返回日期时间的UTC字符串
-		date.getVarDate()	返回支持COM组件的日期值
-		date.getTimezoneOffset()	返回当前时区
-		date.getFullYear()	返回4位数年份值
-		date.getMonth()	返回月份值
-		date.getDate()	返回日期值（1~31）
-		date.getDay()	返回星期值（0~6）
-		date.getHours()	返回小时值
-		date.getMinutes()返回分钟值
+|Date方法|功能说明|
+|---|----|
+|date.getYear()|	返回年份
+|date.getTime()|	返回自1970年1月1日0:0:0至今的毫秒值
+|date.valueOf()|	返回1970年1月1日0:0:0至今的毫秒值|
+|date.toString()|	返回日期时间的字符串
+|date.toDateString()|	返回日期的字符串
+|date.toTimeString()|	返回时间的字符串
+|date.toLocaleString()|	返回日期时间的本地字符串
+|date.toLocaleDateString()|	返回日期的本地字符串
+|date.toLocaleTimeString()|	返回时间的本地字符串
+|date.toDMTString()|	返回日期时间的UTC字符串
+|date.toUTCString()|	返回日期时间的UTC字符串
+|date.getVarDate()|	返回支持COM组件的日期值
+|date.getTimezoneOffset()|	返回当前时区
+|date.getFullYear()|	返回4位数年份值
+|date.getMonth()|	返回月份值
+|date.getDate()|	返回日期值（1~31）
+|date.getDay()|	返回星期值（0~6）
+|date.getHours()|	返回小时值
+|date.getMinutes()|返回分钟值
 		date.getSeconds()	返回秒值
 		date.getMilliseconds()	返回毫秒值
 		date.getUTCFullYear()	返回UTC4位数年份值
@@ -257,14 +266,58 @@ Date()构造函数用来创建表示时间和日期的对象。
 			*                匹配前一项0次或者多次
 			* 或者?可以匹配0次前一项 ；表中列出的是贪婪匹配，尽可能多的匹配重复字符。非贪婪的重复只需在要匹配的字符后加？即可。
 			
-     
+     ====
          4：选择，分组，引用
 
 			|  用于分割供选择的字符
 
 			（）的作用：1.把单独的项组合成一个子表达式。  2.在完整的模式中定义子模式
+			
+			
+5：正则表达式中的锚字符
+>指定匹配的位置
+	     
+|符号|含义|
+|---|----|
+|`^`|开头匹配开头字符|
+|`$`|匹配字符的结尾|
+|`\b`|匹配一个单词的边界，就是位于`\w`和`\W`之间的字符，或位于字符`\w`和文本开头或结尾的位置|
+|`\B`|匹配非单词边界的位置|
+6:指定匹配规则 
+
+|字符|含义|
+|----|----|
+|`g`|全局匹配|
+|`i`|不区分大小写的匹配|
+|`m`|执行多行的匹配|
+
+7：用于模式匹配的字符串的方法
+
+|方法|参数|返回值|描述|
+|----|---|---|---|
+|search（）|正则表达式|第一个与之匹配的子串的位置，若没找到则返回-1||
+|replace（）|参数1：正则；参数2：要进行替换的字符串|根据正则表达式进行文字替换后的字符串的复制|
+|match()|正则表达式|由匹配结果返回的数组|设置匹配规则返回的则是所有结果组成的数组如果传入的正则表达式是非全局的匹配,返回的数组中带有index和input属性|
+|split（）|分割符，或正正则表达式|数组|
 
 
-	
+** 布尔值**
 
-    
+>判断真假，是否，开关； 只有两个值：true false;任何值都可以被转化成布尔值
+
+
+**undefined和null**
+
+######均表示值的空缺，typeof undefined=undefined;;typeof null=object;
+
+######undefined\==object return false ;undefined===null return false;
+######将他们赋值给变量或者属性，或将他们传入函数作为参数，做好使用的是null
+
+**全局对象**
+
+|分类|值|
+|---|---|
+|值属性的全局对象|Infinity,NaN,undefined|
+|函数属性的全局对象|eval(x),isFinite(number),isNaN(number),parseFloat(string),parseInt(string,radix)|
+|URI处理函数|encode(string,unescapedSet),decode(string,reservedSet),decodeURI(encodeURI),decodeURIComponent(encodeURIComponent),encodeURI(uri),encodeURIComponent(uriCompent)|
+|构造函数属性的全局函数|Array(),|
