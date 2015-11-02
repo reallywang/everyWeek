@@ -1,0 +1,2 @@
+### everyWeek
+> study every day.
