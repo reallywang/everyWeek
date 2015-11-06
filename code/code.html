@@ -3,12 +3,68 @@
 <head>
 	<meta charset="UTF-8">
 	<title>code test</title>
+	<style>
+		/* .nav {width:100px;height:100px;background-color: #ccc;} */
+	/* :not */
+	/* 
+
+	.nav li{list-style-type: none;float: left;padding:0 10px;border-right:1px solid #666;}
+	.nav li:last-child{border-right:none;} 
+
+	*/
+	/* 代码简化 */
+	.nav li{list-style-type: none;float: left;padding:0 10px;}
+	/* 
+	add right border
+	.nav li:not(:last-child){
+		border-right:1px solid #666;
+	} 
+	*/
+   /*add left border */
+   .nav li:first-child~li{
+   	border-left:1px solid #666;
+   }
+   /*任意元素垂直居中*/
+   html,body{height:100%;margin:0;}
+   body{
+   	-webkit-align-items:center;
+   	-ms-flex-align:center;
+   	align-items:center;
+   	display:-webkit-flex;
+   	display: flex;
+   }
+   /* 兼容性有待考虑 */
+   /*:after; */
+   .nav li:after{content:"你好";}
+   /* nth-child中使用负数选择1~n */
+   .nav li:nth-child(-n+3){
+		background-color: #f00;
+   }
+	/* 使用svg图标 */
+	/* inline SVG:直接把SVG写入到Html中;需要在页面中插入svg代码;
+	data URIs */
+	.forsvg{width:100px;height:100px;border:1px solid #ccc;}
+	.forsvg img{width:50px;height:10px;}
+	</style>
 
 	<!-- 学习 Mock.js独立后端进行前端开发start -->
 		
 
 		<script src="http://mockjs.com/dist/mock.js"></script>
 		<script src="http://j2.58cdn.com.cn/m58/njs/lib/esl_zepto.min.js"></script>
+		<script>
+			Mock.mock(/\.json/,{'list|1-10':[{
+											'id|+1':1,
+											'email':'@EMAIL'}]
+										});
+			$.ajax({
+				url:'hello.json',
+				dataType:'json'
+			}).done(function(data,status,jqXHR){
+				$('<pre>').text(JSON.stringify(data,null,4))
+					.appendTo('body');
+			});
+		</script>
 	
 
 
@@ -156,9 +212,90 @@ console.log(null===undefined);//false
 			});*/
 			var data={'title':'testMock',
 						'string1|1-10':'*',
-						'string2|3':'value',
 						};
 			$('<pre>').text(JSON.stringify(data,null,5)).appendTo('body');
+/*			var Mock=require('node_modules/mockjs');
+			var data2=Mock.mock({
+								'string2|3':'value',
+		name:{
+					first:'@FIRST',
+					middle:'@FIRST',
+					last:'@LAST',
+					full:'@first @middle @last'
+				}
+			});
+			console.log(JSON.stringify(data2));*/
+
+			//理解apply和call
+			function add(a,b){
+				console.dir(this);
+			}
+			function sub(a,b){
+				console.dir(this);
+			}
+			add(1,2);//Window
+			sub(1,2);//window
+			add.call(sub,1,2);//function sub(a,b)
+			sub.apply(add,[1,2]);//function add(a,b)
+			//改变this的指向，即改变函数执行的上下文。
+			var arr=[1,2,3,4,5,67,8];
+			var m=Math.max.apply(Math,arr);
+			console.log(m);
+			//真正的用武之地是可以改变函数赖以执行的作用域
+			var name='out';
+			var o1={name:'hello'};
+			var o2={name:'world'};
+			function sayName(){console.log(this.name);}
+			sayName.call(this);//out
+			sayName.call(window);//out
+			sayName.call(o1);//hello
+			sayName.call(o2);//world
+			//同一个函数，当指定不同的执行环境时，返回不同的结果。这样最大的好处就是解耦
+		//使用call和apply，函数和对象没有强依赖关系，多个对象可以使用同一个函数
+		var zhangsan={cut:function(){console.log(this.tree);}};
+		var lisi={tree:'杨树'};
+		zhangsan.cut.call(lisi);//杨树
+		//理解原型链
+		//原型对象：js中每当定义一个对象或函数的时候，对象中都会包含一些预定义的属性，其中就包含原型对象prototype
+		var myObject=function(name){
+			this.name=name;
+			return this;
+		};
+		console.log(typeof myObject.prototype);//object
+		myObject.prototype.getName=function(){
+			return this.name;
+		};
+		console.log(myObject()===window);
+		//js在定义和实例化任何一个对象的时候，都会创建一个隐含的属性__proto__;
+		console.log(typeof myObject);//function
+		console.log(myObject.length);
+		//在定义myObject时，同时给他定义了一个__proto__属性，并且__proto__=Function.prototype;
+		//当实例化一个对象的时候，对象的__proto__属性会被赋值为其构造者的原型对象;
+		console.log(myObject.__proto__===Function.prototype);
+		var myInstance=new myObject('foo');
+		/*console.log(myInstance.__proto__===myObject.prototype);*/	//true	
+		console.log(myInstance.__proto__);
+
+
+
+		//??????
+		//http://www.libuchao.com/2012/05/14/prototypes-in-javascript/
+		
+
+		var a={};
+		console.log(a.prototype);//undefined
+		var b=function(){};
+		console.log(b.prototype);//b{}
 		</script>
+		<ul class="nav">
+			<li>item</li>
+			<li>item</li>
+			<li>item</li>
+			<li>item</li>
+			<li>item</li>
+		</ul>
+		<div class="forsvg">
+			<img src="../img/iconfont-iconfontkongaixin.svg" alt="test SVG">
+		</div>
 </body>
 </html>
