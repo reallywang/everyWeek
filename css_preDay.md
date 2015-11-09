@@ -22,4 +22,20 @@ SVG的使用：
     <object type="image/svg+xml" data="img.svg" class="logo">
         logo
     </object>
+3. 移动端多屏适应
+    - 各种像素
+    物理像素：显示器上最小的物理显示单元。
+    设备独立像素：计算机坐标系统中的一个点，与设备无关。就是css像素。布局像素。
+    设备像素比：物理像素和设备独立像素的比。dpr;device pixel ratio;
+    js：dpr=window.devicePixelRatio
+    位图像素：一个位图像素是栅栏图像最小的数据单元。包含着自身的一些显示信息。
+    - retina 1px border
+    css设置的border:1px。由于retina的dpr的不同，1px在不同的尺寸的屏幕上的最终呈现也不相同。
+    - rem单位的使用
+    针对不同屏幕的尺寸和dpr，动态的改变html的font-size。
+    rem=document.documentElement.clientWidth*dpr/10;
+    dpr=window.devicePixelRatio;
+    - 元素的rem
+     rem=px/基准值；
 
+     
