@@ -12,17 +12,17 @@
 
  SVG的使用：
 
- - `<img>`标签使用 
+  - `<img>`标签使用 
    > <img src="/path/to/img.svg" alt="test svg">
- - 背景图片
+  - 背景图片
      background:url();
- - inline svg
-    - 在页面中直接插入svg代码
-    <body><!--paste in SVG code，img will show--></body>
-    - svg as an <object> 
-    <object type="image/svg+xml" data="img.svg" class="logo">
-        logo
-    </object>
+  - inline svg
+  - 在页面中直接插入svg代码
+         <body><!--paste in SVG code，img will show--></body>
+  - svg as an <object> 
+        <object type="image/svg+xml" data="img.svg" class="logo">
+         logo
+        </object>
  3. 移动端多屏适应
     
    - 各种像素
@@ -40,4 +40,11 @@
   - 元素的rem
      rem=px/基准值；
 
-
+ 4. float工作原理
+ 5. css居中
+  - 水平居中 
+    - 行内或类行内元素
+     `text-align:center`对内部的`inline/inline-block/inline-table/inline/flex`生效;
+    - 块级元素
+      - 已知宽度的块级元素的margin:0 auto;
+    

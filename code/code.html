@@ -25,14 +25,14 @@
    	border-left:1px solid #666;
    }
    /*任意元素垂直居中*/
-   html,body{height:100%;margin:0;}
-   body{
-   	-webkit-align-items:center;
-   	-ms-flex-align:center;
-   	align-items:center;
-   	display:-webkit-flex;
-   	display: flex;
-   }
+/*    html,body{height:100%;margin:0;}
+body{
+	-webkit-align-items:center;
+	-ms-flex-align:center;
+	align-items:center;
+	display:-webkit-flex;
+	display: flex;
+} */
    /* 兼容性有待考虑 */
    /*:after; */
    .nav li:after{content:"你好";}
@@ -45,6 +45,14 @@
 	data URIs */
 	.forsvg{width:100px;height:100px;border:1px solid #ccc;}
 	.forsvg img{width:50px;height:10px;}
+	/* test for align */
+	.testAuto{display:flex;width:100%;height:100px;background-color: #ccc;margin-top:10px;text-align: center;}
+	.testAuto .alink{/* display: inline-block; */flex:1;text-decoration: none;margin:10px;}
+	body{background: #f06d06;}
+	main{background-color: white;margin:20px 0;
+		padding:10px;}
+	.center{margin:0 auto;width:200px;background-color: black;padding:20px;color: white;}
+
 	</style>
 
 	<!-- 学习 Mock.js独立后端进行前端开发start -->
@@ -297,5 +305,17 @@ console.log(null===undefined);//false
 		<div class="forsvg">
 			<img src="../img/iconfont-iconfontkongaixin.svg" alt="test SVG">
 		</div>
+		<div class="testAuto">
+			<!-- <span>test auto</span> -->
+			<a href="" class="alink">navgation</a>
+			<a href="" class="alink">navgation</a>
+			<a href="" class="alink">navgation</a>
+			<a href="" class="alink">navgation</a>
+			<a href="" class="alink">navgation</a>
+		
+		</div>
+		<main>
+			<div class="center">test 块级元素的center</div>
+		</main>
 </body>
 </html>
