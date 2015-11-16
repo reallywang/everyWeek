@@ -40,4 +40,16 @@ rule可选，七种格式：
  |Mock.mock(rurl,function(options))||
 
 3. apply()和call()都是在特定的作用域中调用函数。等同于设置函数体内this对象的值。apply(函数运行的上下文可以是任何对象，数组)
-4. 
+4. html5 pushState
+pushState将指定的url添加到浏览器的history对象中，
+ 
+`window.history.pushState([dataObj],[title],[url]);`
+
+    stateObj:状态对象;可以是null;
+    title:可以是null;
+    url：我们想要出现在浏览器地址栏上的url
+*在chrome devtools中console panel中可以直接测试；*
+
+pjax=pushState+ajax
+
+Browser support:[can i use](http://caniuse.com/#search=pushState)

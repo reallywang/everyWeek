@@ -47,4 +47,5 @@
      `text-align:center`对内部的`inline/inline-block/inline-table/inline/flex`生效;
     - 块级元素
       - 已知宽度的块级元素的margin:0 auto;
+      - 已知宽度的浮动元素的
     
