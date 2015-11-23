@@ -1,4 +1,4 @@
-1. 用js检测离线/在线状态
+### 1.  用js检测离线/在线状态
 
 `navigator`对象
 
@@ -10,7 +10,7 @@
 >note:当用户工作断网，WEB应用检测到相应的状态，利用本地Web Storage保存用户状态
 
 
-2. 使用 Mock.js进行独立于后端的前端开发
+###2. 使用 Mock.js进行独立于后端的前端开发
 
 Mock.js实现的功能
 
@@ -39,8 +39,8 @@ rule可选，七种格式：
  |Mock.mock(rurl,templete)|记录数据模板，当拦截到匹配rurl的Ajax请求时，将根据数据模板templete生成模拟数据，并作为响应数据返回|
  |Mock.mock(rurl,function(options))||
 
-3. apply()和call()都是在特定的作用域中调用函数。等同于设置函数体内this对象的值。apply(函数运行的上下文可以是任何对象，数组)
-4. html5 pushState
+###3. apply()和call()都是在特定的作用域中调用函数。等同于设置函数体内this对象的值。apply(函数运行的上下文可以是任何对象，数组)
+###4. html5 pushState
 pushState将指定的url添加到浏览器的history对象中，
  
 `window.history.pushState([dataObj],[title],[url]);`
@@ -53,3 +53,14 @@ pushState将指定的url添加到浏览器的history对象中，
 pjax=pushState+ajax
 
 Browser support:[can i use](http://caniuse.com/#search=pushState)
+
+###5. jsonp
+
+- 数据格式：callback({dataPara});
+
+- 本地定义回调函数。回调函数的名称在请求中指定的。回调函数对数据进行相关操作。
+
+- 动态script标签，src指定发送请求的url。
+
+- 服务器（上步的url）中其实是本地定义回调函数的调用。
+

@@ -49,3 +49,16 @@
       - 已知宽度的块级元素的margin:0 auto;
       - 已知宽度的浮动元素的
     
+ 6. 纯css绘制图形
+ 
+          .css-arrow-multicolor{
+                border-color:red green blue orange;
+                border-style: solid;
+                border-width:20px;
+                width:0;
+                height:0;
+          }
+
+  
+
+    

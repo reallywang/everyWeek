@@ -1,31 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>code test</title>
-	<style>
-		/* .nav {width:100px;height:100px;background-color: #ccc;} */
-	/* :not */
-	/* 
+    <meta charset="UTF-8">
+    <title>code test</title>
+    <style>
+    /* .nav {width:100px;height:100px;background-color: #ccc;} */
+    /* :not */
+    /* 
 
 	.nav li{list-style-type: none;float: left;padding:0 10px;border-right:1px solid #666;}
 	.nav li:last-child{border-right:none;} 
 
 	*/
-	/* 代码简化 */
-	.nav li{list-style-type: none;float: left;padding:0 10px;}
-	/* 
+    /* 代码简化 */
+    
+    .nav li {
+        list-style-type: none;
+        float: left;
+        padding: 0 10px;
+    }
+    /* 
 	add right border
 	.nav li:not(:last-child){
 		border-right:1px solid #666;
 	} 
 	*/
-   /*add left border */
-   .nav li:first-child~li{
-   	border-left:1px solid #666;
-   }
-   /*任意元素垂直居中*/
-/*    html,body{height:100%;margin:0;}
+    /*add left border */
+    
+    .nav li:first-child~li {
+        border-left: 1px solid #666;
+    }
+    /*任意元素垂直居中*/
+    /*    html,body{height:100%;margin:0;}
 body{
 	-webkit-align-items:center;
 	-ms-flex-align:center;
@@ -33,289 +40,411 @@ body{
 	display:-webkit-flex;
 	display: flex;
 } */
-   /* 兼容性有待考虑 */
-   /*:after; */
-   .nav li:after{content:"你好";}
-   /* nth-child中使用负数选择1~n */
-   .nav li:nth-child(-n+3){
-		background-color: #f00;
-   }
-	/* 使用svg图标 */
-	/* inline SVG:直接把SVG写入到Html中;需要在页面中插入svg代码;
+    /* 兼容性有待考虑 */
+    /*:after; */
+    
+    .nav li:after {
+        content: "你好";
+    }
+    /* nth-child中使用负数选择1~n */
+    
+    .nav li:nth-child(-n+3) {
+        background-color: #f00;
+    }
+    /* 使用svg图标 */
+    /* inline SVG:直接把SVG写入到Html中;需要在页面中插入svg代码;
 	data URIs */
-	.forsvg{width:100px;height:100px;border:1px solid #ccc;}
-	.forsvg img{width:50px;height:10px;}
-	/* test for align */
-	.testAuto{display:flex;width:100%;height:100px;background-color: #ccc;margin-top:10px;text-align: center;}
-	.testAuto .alink{/* display: inline-block; */flex:1;text-decoration: none;margin:10px;}
-	body{background: #f06d06;}
-	main{background-color: white;margin:20px 0;
-		padding:10px;}
-	.center{margin:0 auto;width:200px;background-color: black;padding:20px;color: white;}
-
-	</style>
-
-	<!-- 学习 Mock.js独立后端进行前端开发start -->
-		
-
-		<script src="http://mockjs.com/dist/mock.js"></script>
-		<script src="http://j2.58cdn.com.cn/m58/njs/lib/esl_zepto.min.js"></script>
-		<script>
-			Mock.mock(/\.json/,{'list|1-10':[{
-											'id|+1':1,
-											'email':'@EMAIL'}]
-										});
-			$.ajax({
-				url:'hello.json',
-				dataType:'json'
-			}).done(function(data,status,jqXHR){
-				$('<pre>').text(JSON.stringify(data,null,4))
-					.appendTo('body');
-			});
-		</script>
-	
-
-
-
-	<!-- 学习 Mock.js独立后端进行前端开发end -->
-
-
-
-	<script>
-		//正则match()
-		//解析一个url
-	//	var url=/(\w+):\/\/([\w.]+)\/(\S*)/g;
-	    var url=/(\w+):\/\/([\w.]+)\/(\S*)/;
-		var text="Visit my blog at http://www.baidu.com/~dere";
-		var result=text.match(url);
-		if(result!=null){
-			var fullUrl=result[0];
-			console.log(result);//["http://www.baidu.com/~dere", "http", "www.baidu.com", "~dere", index: 17, input: "Visit my blog at http://www.baidu.com/~dere"]
-			console.log(fullUrl);
-		}
-		//boolean值
-		var str=undefined;
-		if(!str){console.log(str);}
-		console.log(typeof undefined);//undefined
-		console.log(typeof null);//object
-		//全局对象
-		var urlstr="http://www.baidu.com/123 value#start";
-		var url=encodeURI(urlstr);
-		console.log(url);
-		console.log(encodeURI('\uD800\uDFFF'));//%F0%90%8F%BF
-		
-
-		//JSON对象的两个方法
-		//stringify()
-		var user={};//JSON对象
-
-		user.name="wang";
-		user.age="23";
-		user.country="China";
-		console.log(user);//Object {name: "wang", age: "23", xountry: "China"}
-		var userStr0=JSON.stringify(user);
-		//var user={"name":"wang","age":23,"country":"China"};
-		
-		console.log(userStr0);//{"name":"wang","age":"23","country":"China"}
-		console.log(typeof userStr0);//string
-		var userStr1=JSON.stringify(user,function(key,value){
-				if(key==='age'){
-					return;//过滤掉该字段
-				}
-				return value;
-		});
-		console.log(userStr1);//{"name":"wang","country":"China"}
-		user.girlFriend={name:"hehe",height:"168","":123};
-		var userStr2=JSON.stringify(user,function(key,value){
-			if(key==='name'){
-				return;
-			}
-			return value;
-		});
-		console.log(userStr2);
-		var userStr3=JSON.stringify(user,["age","name","girlFriend","country","height"]);//第二个参数是数组的话，用来指定键值对和他们的顺序
-		//JSON.parse(text[,reviver])
-		//
-		console.log(userStr3);
-		var userStr4=JSON.stringify(user);
-		console.log(userStr4);
-		//正则表达式的字符串方法；
-		//search(正则表达式)如果参数不是正则表达式，则会先自动转化成正则表达式；
-		//search不支持全局搜索
-		var fstr="javaScript";
-		var regs=/javascript/i;
-		console.log(fstr.search(regs));
-		var result=fstr.search('javaScript');
-		//replace()
-		//stringObj.replace(rgExp,replaceTxt);
-		//rgExp正则或字符串;replaceTxt:查找的字符串要替换的值
-		//不带匹配规则g,仅仅匹配一次
-		var strObj="终过，伟大的国家，终过";
-		var forReplace='中国';
-		console.log(strObj.replace('终过',forReplace));//中国，伟大的国家，终过
-		console.log(strObj.replace(/终过/g,forReplace));//中国，伟大的国家，中国
-		var strObj2="中华人民共和国，中华人民共和国";
-		var res2=strObj2.replace(/(人)/g,"<font color=red>$1</font>");
-		console.log(strObj2);
-		//document.write(res2);
-		//子匹配
-		//正则表达式中使用()这个圆括号括起来的子表达式是带有从左到右索引编号的，而且正则表达式会记忆与每个表达式匹配的文本，在替换字串中出现了$+数字，那么replace()将用与指定的子表达式相匹配的文本来替换这两个字符。
-		//var res3=strObj2.replace(/(共和国)/g,"<font color=red>$1</font>");
-		var strObj3="The quick brown fox jumped over the lazy dog.";
-		var reg3=/(\S+)(\s+)(\S+)/;//\s任何UNICODE空白符;\S任何非unicode空白符的字符;
-		//console.log(strObj3.replace(reg3,));
-		var strObj4="Lili,14,China";
-		var reg4=new RegExp("(\\w+),(\\d+),(\\w+)","gmi");
-		//\w任何ASCII字符组成的单词[a-zA-Z0-9]
-		//\W任何不是ASCII字符组成的单词，[^a-zA-Z0-9]
-		//\d任何ASCII数字，[0-9]
-		//\D除了ASCII数字之外的任何字符[^0-9]
-		var res4=strObj4.replace(reg4,"she is $1,$2 years old,comes from $3");
-		console.log(res4);
-		//match()
-		var strObj5="1 plus 2 is 3";
-		var reg5=/\d+/g;
-		var res5=strObj5.match(reg5);
-		console.log(res5);//["1", "2", "3"]
-		var reg6=/\d+/;
-		var res6=strObj5.match(reg6);
-		console.log(res6);//["1", index: 0, input: "1 plus 2 is 3"]
-	//split()
-	//test()是正则表达式的方法,接收字符串参数，返回一个布尔值，标示字符串是否匹配成功
-	var userName='JohnSmith';
-	var reg7=/[A-za-z_-]+/;
-	var res7=reg7.test(userName);
-	console.log(res7);//true
-
-	//boolean值
-	//返回false的值
-
-	console.log(Boolean(undefined));
-	console.log(Boolean(null));
-	console.log(Boolean(0));
-	console.log(Boolean(-0));
-	console.log(Boolean(""));
-	console.log(Boolean(NaN));
-//除此之外，在js中所有的值均是转换成true值；
-		
-//null和undefined的区别和联系
-console.log(typeof null);//object,可以将null认为是一个特殊的对象，值是非对象；
-console.log(typeof undefined);//undefined，变量的一种取值，表示定义的变量未被初始化
-//两者均表示值的空缺，均没有任何方法和属性
-console.log(null==undefined);//true
-console.log(null===undefined);//false
-//全局对象
+    
+    .forsvg {
+        width: 100px;
+        height: 100px;
+        border: 1px solid #ccc;
+    }
+    
+    .forsvg img {
+        width: 50px;
+        height: 10px;
+    }
+    /* test for align */
+    
+    .testAuto {
+        display: flex;
+        width: 100%;
+        height: 100px;
+        background-color: #ccc;
+        margin-top: 10px;
+        text-align: center;
+    }
+    
+    .testAuto .alink {
+        /* display: inline-block; */
+        flex: 1;
+        text-decoration: none;
+        margin: 10px;
+    }
+    /* 	body{background: #f06d06;}
+main{background-color: white;margin:20px 0;
+	padding:10px;} */
+    
+    .center {
+        margin: 0 auto;
+        width: 200px;
+        background-color: black;
+        padding: 20px;
+        color: white;
+    }
+    
+    .css-arrow-multicolor {
+        border-color: red green blue orange;
+        border-style: solid;
+        border-width: 20px;
+        width: 0;
+        height: 0;
+    }
+    
+    .square {
+        border-color: #f00;
+        border-style: solid;
+        border-width: 100px;
+        height: 0;
+        width: 0;
+        margin-top: 10px;
+    }
+    
+    .circle {
+        width: 100px;
+        height: 100px;
+        background-color: #0f0;
+        -moz-border-radius: 50px;
+        -webkit-border-radius: 50px;
+        border-radius: 50px;
+    }
+    
+    .semicircle {
+        width: 100px;
+        height: 50px;
+        background-color: #00f;
+        -moz-border-radius: 100px 100px 0 0;
+        -webkit-border-radius: 100px 100px 0 0;
+        border-radius: 100px 100px 0 0;
+        /* 	-moz-border-radius:50px 50px 0 0;
+	-webkit-border-radius:50px 50px 0 0;
+	border-radius:50px 50px 0 0; */
+    }
+    
+    .trapezoid {
+        width: 100px;
+        border-top: 100px solid #f00;
+        border-left: 100px solid #f00;
+        border-bottom: 50px solid transparent;
+    }
+    </style>
+    <!-- 学习 Mock.js独立后端进行前端开发start -->
+    <script src="http://mockjs.com/dist/mock.js"></script>
+    <script src="http://j2.58cdn.com.cn/m58/njs/lib/esl_zepto.min.js"></script>
+    <script>
+    Mock.mock(/\.json/, {
+        'list|1-10': [{
+            'id|+1': 1,
+            'email': '@EMAIL'
+        }]
+    });
+    $.ajax({
+        url: 'hello.json',
+        dataType: 'json'
+    }).done(function(data, status, jqXHR) {
+        $('<pre>').text(JSON.stringify(data, null, 4))
+            .appendTo('body');
+    });
+    </script>
+    <!-- 学习 Mock.js独立后端进行前端开发end -->
+    <script>
+    //正则match()
+    //解析一个url
+    //	var url=/(\w+):\/\/([\w.]+)\/(\S*)/g;
+    var url = /(\w+):\/\/([\w.]+)\/(\S*)/;
+    var text = "Visit my blog at http://www.baidu.com/~dere";
+    var result = text.match(url);
+    if (result != null) {
+        var fullUrl = result[0];
+        console.log(result); //["http://www.baidu.com/~dere", "http", "www.baidu.com", "~dere", index: 17, input: "Visit my blog at http://www.baidu.com/~dere"]
+        console.log(fullUrl);
+    }
+    //boolean值
+    var str = undefined;
+    if (!str) {
+        console.log(str);
+    }
+    console.log(typeof undefined); //undefined
+    console.log(typeof null); //object
+    //全局对象
+    var urlstr = "http://www.baidu.com/123 value#start";
+    var url = encodeURI(urlstr);
+    console.log(url);
+    console.log(encodeURI('\uD800\uDFFF')); //%F0%90%8F%BF
 
 
-		
+    //JSON对象的两个方法
+    //stringify()
+    var user = {}; //JSON对象
 
-	</script>
+    user.name = "wang";
+    user.age = "23";
+    user.country = "China";
+    console.log(user); //Object {name: "wang", age: "23", xountry: "China"}
+    var userStr0 = JSON.stringify(user);
+    //var user={"name":"wang","age":23,"country":"China"};
+
+    console.log(userStr0); //{"name":"wang","age":"23","country":"China"}
+    console.log(typeof userStr0); //string
+    var userStr1 = JSON.stringify(user, function(key, value) {
+        if (key === 'age') {
+            return; //过滤掉该字段
+        }
+        return value;
+    });
+    console.log(userStr1); //{"name":"wang","country":"China"}
+    user.girlFriend = {
+        name: "hehe",
+        height: "168",
+        "": 123
+    };
+    var userStr2 = JSON.stringify(user, function(key, value) {
+        if (key === 'name') {
+            return;
+        }
+        return value;
+    });
+    console.log(userStr2);
+    var userStr3 = JSON.stringify(user, ["age", "name", "girlFriend", "country", "height"]); //第二个参数是数组的话，用来指定键值对和他们的顺序
+    //JSON.parse(text[,reviver])
+    //
+    console.log(userStr3);
+    var userStr4 = JSON.stringify(user);
+    console.log(userStr4);
+    //正则表达式的字符串方法；
+    //search(正则表达式)如果参数不是正则表达式，则会先自动转化成正则表达式；
+    //search不支持全局搜索
+    var fstr = "javaScript";
+    var regs = /javascript/i;
+    console.log(fstr.search(regs));
+    var result = fstr.search('javaScript');
+    //replace()
+    //stringObj.replace(rgExp,replaceTxt);
+    //rgExp正则或字符串;replaceTxt:查找的字符串要替换的值
+    //不带匹配规则g,仅仅匹配一次
+    var strObj = "终过，伟大的国家，终过";
+    var forReplace = '中国';
+    console.log(strObj.replace('终过', forReplace)); //中国，伟大的国家，终过
+    console.log(strObj.replace(/终过/g, forReplace)); //中国，伟大的国家，中国
+    var strObj2 = "中华人民共和国，中华人民共和国";
+    var res2 = strObj2.replace(/(人)/g, "<font color=red>$1</font>");
+    console.log(strObj2);
+    //document.write(res2);
+    //子匹配
+    //正则表达式中使用()这个圆括号括起来的子表达式是带有从左到右索引编号的，而且正则表达式会记忆与每个表达式匹配的文本，在替换字串中出现了$+数字，那么replace()将用与指定的子表达式相匹配的文本来替换这两个字符。
+    //var res3=strObj2.replace(/(共和国)/g,"<font color=red>$1</font>");
+    var strObj3 = "The quick brown fox jumped over the lazy dog.";
+    var reg3 = /(\S+)(\s+)(\S+)/; //\s任何UNICODE空白符;\S任何非unicode空白符的字符;
+    //console.log(strObj3.replace(reg3,));
+    var strObj4 = "Lili,14,China";
+    var reg4 = new RegExp("(\\w+),(\\d+),(\\w+)", "gmi");
+    //\w任何ASCII字符组成的单词[a-zA-Z0-9]
+    //\W任何不是ASCII字符组成的单词，[^a-zA-Z0-9]
+    //\d任何ASCII数字，[0-9]
+    //\D除了ASCII数字之外的任何字符[^0-9]
+    var res4 = strObj4.replace(reg4, "she is $1,$2 years old,comes from $3");
+    console.log(res4);
+    //match()
+    var strObj5 = "1 plus 2 is 3";
+    var reg5 = /\d+/g;
+    var res5 = strObj5.match(reg5);
+    console.log(res5); //["1", "2", "3"]
+    var reg6 = /\d+/;
+    var res6 = strObj5.match(reg6);
+    console.log(res6); //["1", index: 0, input: "1 plus 2 is 3"]
+    //split()
+    //test()是正则表达式的方法,接收字符串参数，返回一个布尔值，标示字符串是否匹配成功
+    var userName = 'JohnSmith';
+    var reg7 = /[A-za-z_-]+/;
+    var res7 = reg7.test(userName);
+    console.log(res7); //true
+
+    //boolean值
+    //返回false的值
+
+    console.log(Boolean(undefined));
+    console.log(Boolean(null));
+    console.log(Boolean(0));
+    console.log(Boolean(-0));
+    console.log(Boolean(""));
+    console.log(Boolean(NaN));
+    //除此之外，在js中所有的值均是转换成true值；
+
+    //null和undefined的区别和联系
+    console.log(typeof null); //object,可以将null认为是一个特殊的对象，值是非对象；
+    console.log(typeof undefined); //undefined，变量的一种取值，表示定义的变量未被初始化
+    //两者均表示值的空缺，均没有任何方法和属性
+    console.log(null == undefined); //true
+    console.log(null === undefined); //false
+    //全局对象
+    </script>
 </head>
+
 <body>
-		<script>
-		/*	var data=Mock.mock({
-				    'list|1-10':[{
-					'id|+1':1
-				}]
-			});*/
-			var data={'title':'testMock',
-						'string1|1-10':'*',
-						};
-			$('<pre>').text(JSON.stringify(data,null,5)).appendTo('body');
-/*			var Mock=require('node_modules/mockjs');
-			var data2=Mock.mock({
-								'string2|3':'value',
-		name:{
-					first:'@FIRST',
-					middle:'@FIRST',
-					last:'@LAST',
-					full:'@first @middle @last'
-				}
-			});
-			console.log(JSON.stringify(data2));*/
+    <script>
+    /*	var data=Mock.mock({
+    				    'list|1-10':[{
+    					'id|+1':1
+    				}]
+    			});*/
+    var data = {
+        'title': 'testMock',
+        'string1|1-10': '*',
+    };
+    $('<pre>').text(JSON.stringify(data, null, 5)).appendTo('body');
+    /*			var Mock=require('node_modules/mockjs');
+    			var data2=Mock.mock({
+    								'string2|3':'value',
+    		name:{
+    					first:'@FIRST',
+    					middle:'@FIRST',
+    					last:'@LAST',
+    					full:'@first @middle @last'
+    				}
+    			});
+    			console.log(JSON.stringify(data2));*/
 
-			//理解apply和call
-			function add(a,b){
-				console.dir(this);
-			}
-			function sub(a,b){
-				console.dir(this);
-			}
-			add(1,2);//Window
-			sub(1,2);//window
-			add.call(sub,1,2);//function sub(a,b)
-			sub.apply(add,[1,2]);//function add(a,b)
-			//改变this的指向，即改变函数执行的上下文。
-			var arr=[1,2,3,4,5,67,8];
-			var m=Math.max.apply(Math,arr);
-			console.log(m);
-			//真正的用武之地是可以改变函数赖以执行的作用域
-			var name='out';
-			var o1={name:'hello'};
-			var o2={name:'world'};
-			function sayName(){console.log(this.name);}
-			sayName.call(this);//out
-			sayName.call(window);//out
-			sayName.call(o1);//hello
-			sayName.call(o2);//world
-			//同一个函数，当指定不同的执行环境时，返回不同的结果。这样最大的好处就是解耦
-		//使用call和apply，函数和对象没有强依赖关系，多个对象可以使用同一个函数
-		var zhangsan={cut:function(){console.log(this.tree);}};
-		var lisi={tree:'杨树'};
-		zhangsan.cut.call(lisi);//杨树
-		//理解原型链
-		//原型对象：js中每当定义一个对象或函数的时候，对象中都会包含一些预定义的属性，其中就包含原型对象prototype
-		var myObject=function(name){
-			this.name=name;
-			return this;
-		};
-		console.log(typeof myObject.prototype);//object
-		myObject.prototype.getName=function(){
-			return this.name;
-		};
-		console.log(myObject()===window);
-		//js在定义和实例化任何一个对象的时候，都会创建一个隐含的属性__proto__;
-		console.log(typeof myObject);//function
-		console.log(myObject.length);
-		//在定义myObject时，同时给他定义了一个__proto__属性，并且__proto__=Function.prototype;
-		//当实例化一个对象的时候，对象的__proto__属性会被赋值为其构造者的原型对象;
-		console.log(myObject.__proto__===Function.prototype);
-		var myInstance=new myObject('foo');
-		/*console.log(myInstance.__proto__===myObject.prototype);*/	//true	
-		console.log(myInstance.__proto__);
+    //理解apply和call
+    function add(a, b) {
+        console.dir(this);
+    }
+
+    function sub(a, b) {
+        console.dir(this);
+    }
+    add(1, 2); //Window
+    sub(1, 2); //window
+    add.call(sub, 1, 2); //function sub(a,b)
+    sub.apply(add, [1, 2]); //function add(a,b)
+    //改变this的指向，即改变函数执行的上下文。
+    var arr = [1, 2, 3, 4, 5, 67, 8];
+    var m = Math.max.apply(Math, arr);
+    console.log(m);
+    //真正的用武之地是可以改变函数赖以执行的作用域
+    var name = 'out';
+    var o1 = {
+        name: 'hello'
+    };
+    var o2 = {
+        name: 'world'
+    };
+
+    function sayName() {
+        console.log(this.name);
+    }
+    sayName.call(this); //out
+    sayName.call(window); //out
+    sayName.call(o1); //hello
+    sayName.call(o2); //world
+    //同一个函数，当指定不同的执行环境时，返回不同的结果。这样最大的好处就是解耦
+    //使用call和apply，函数和对象没有强依赖关系，多个对象可以使用同一个函数
+    var zhangsan = {
+        cut: function() {
+            console.log(this.tree);
+        }
+    };
+    var lisi = {
+        tree: '杨树'
+    };
+    zhangsan.cut.call(lisi); //杨树
+    //理解原型链
+    //原型对象：js中每当定义一个对象或函数的时候，对象中都会包含一些预定义的属性，其中就包含原型对象prototype
+    var myObject = function(name) {
+        this.name = name;
+        return this;
+    };
+    console.log(typeof myObject.prototype); //object
+    myObject.prototype.getName = function() {
+        return this.name;
+    };
+    console.log(myObject() === window);
+    //js在定义和实例化任何一个对象的时候，都会创建一个隐含的属性__proto__;
+    console.log(typeof myObject); //function
+    console.log(myObject.length);
+    //在定义myObject时，同时给他定义了一个__proto__属性，并且__proto__=Function.prototype;
+    //当实例化一个对象的时候，对象的__proto__属性会被赋值为其构造者的原型对象;
+    console.log(myObject.__proto__ === Function.prototype);
+    var myInstance = new myObject('foo');
+    /*console.log(myInstance.__proto__===myObject.prototype);*/ //true	
+    console.log(myInstance.__proto__);
 
 
 
-		//??????
-		//http://www.libuchao.com/2012/05/14/prototypes-in-javascript/
-		
+    //??????
+    //http://www.libuchao.com/2012/05/14/prototypes-in-javascript/
 
-		var a={};
-		console.log(a.prototype);//undefined
-		var b=function(){};
-		console.log(b.prototype);//b{}
-		</script>
-		<ul class="nav">
-			<li>item</li>
-			<li>item</li>
-			<li>item</li>
-			<li>item</li>
-			<li>item</li>
-		</ul>
-		<div class="forsvg">
-			<img src="../img/iconfont-iconfontkongaixin.svg" alt="test SVG">
-		</div>
-		<div class="testAuto">
-			<!-- <span>test auto</span> -->
-			<a href="" class="alink">navgation</a>
-			<a href="" class="alink">navgation</a>
-			<a href="" class="alink">navgation</a>
-			<a href="" class="alink">navgation</a>
-			<a href="" class="alink">navgation</a>
-		
-		</div>
-		<main>
-			<div class="center">test 块级元素的center</div>
-		</main>
+
+    var a = {};
+    console.log(a.prototype); //undefined
+    var b = function() {};
+    console.log(b.prototype); //b{}
+    /*理解js this的用法*/
+
+    /*function foo*/
+    function foo() {
+        console.log(this.a);
+        console.log(this);
+    }
+
+    function doFoo(fn) {
+        fn();
+    }
+
+    function doFoo2(o) {
+        o.foo();
+    }
+    var obj = {
+        a: 2,
+        foo: foo
+    };
+    var a="I am an a ";
+    doFoo(foo);//this 指向函数执行时的当前对象  -------window   console: I am an a;
+    doFoo(obj.foo); 
+    doFoo2(obj);//this 指向函数执行时的当前对象 ------- obj{a:2,foo:foo}
+
+
+
+   // doFoo2();
+    /*end*/
+    </script>
+    <ul class="nav">
+        <li>item</li>
+        <li>item</li>
+        <li>item</li>
+        <li>item</li>
+        <li>item</li>
+    </ul>
+    <div class="forsvg">
+        <img src="../img/iconfont-iconfontkongaixin.svg" alt="test SVG">
+    </div>
+    <div class="testAuto">
+        <!-- <span>test auto</span> -->
+        <a href="" class="alink">navgation</a>
+        <a href="" class="alink">navgation</a>
+        <a href="" class="alink">navgation</a>
+        <a href="" class="alink">navgation</a>
+        <a href="" class="alink">navgation</a>
+    </div>
+    <main>
+        <div class="center">test 块级元素的center</div>
+    </main>
+    <div class="css-arrow-multicolor"></div>
+    <div class="square"></div>
+    <div class="circle"></div>
+    <div class="semicircle"></div>
+    <div class="trapezoid"></div>
+    <div class="touchTest"></div>
 </body>
+
 </html>
